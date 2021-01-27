@@ -19,7 +19,7 @@
         padding: 1%;
         font: bold;
         font-size: 20px;
-        color:green;
+        color: green;
       }
       input {
         font-size: 30px;
@@ -47,7 +47,7 @@
             alert(
               `Player Input Number is ${data.number} and Random Number is ${data.randomNumber} You Got ${data.points} Points.`
             );
-            document.getElementById("number").value = '';
+            document.getElementById("number").value = "";
             let point = data.points;
             if (point != 0) {
               score = score + point;
@@ -60,38 +60,40 @@
       };
 
       const Play = () => {
-        var number = document.getElementById("number").value;
-        if (number == "") {
-          alert("Please Enter a Number (1-6)");
+        var num = Number(document.getElementById("number").value);
+        let number = Number(num);
+        if (number == ""  ||  number > 6) {
+          alert("Please Enter a Number B/W (1-6)");
         } else {
-          var randomNumber = Math.floor(Math.random() * 6 + 1);
-          return new Promise((resolved, reject) => {
-            if (isNaN(number)) {
-              reject(new Error("Inavlid input"));
-            }
-            if (number == randomNumber) {
-              resolved({
-                points: 2,
-                randomNumber,
-                number,
-              });
-            } else if (
-              number == randomNumber - 1 ||
-              number == randomNumber + 1
-            ) {
-              resolved({
-                points: 1,
-                randomNumber,
-                number,
-              });
-            } else {
-              resolved({
-                points: 0,
-                randomNumber,
-                number,
-              });
-            }
-          });
+          if (isNaN(number)) {
+            alert("Inavlid input");
+          } else {
+            var randomNumber = Math.floor(Math.random() * 6 + 1);
+            return new Promise((resolved, reject) => {
+              if (number == randomNumber) {
+                resolved({
+                  points: 2,
+                  randomNumber,
+                  number,
+                });
+              } else if (
+                number == randomNumber - 1 ||
+                number == randomNumber + 1
+              ) {
+                resolved({
+                  points: 1,
+                  randomNumber,
+                  number,
+                });
+              } else {
+                resolved({
+                  points: 0,
+                  randomNumber,
+                  number,
+                });
+              }
+            });
+          }
         }
       };
     </script>
